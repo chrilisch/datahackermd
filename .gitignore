@@ -1,0 +1,17 @@
+dist
+cabal-dev
+*.o
+*.hi
+*.chi
+*.chs.h
+.virtualenv
+
+# Hakyll binary
+datahackermd
+
+# Hakyll cache and deploy folders
+_site
+_cache
+
+# Stupid Mac
+.DS_Store
