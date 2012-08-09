@@ -30,16 +30,18 @@ database queries. Static sites have some big advantages:
   database, I keep the templating backbone and the content of the site in a
   [git][] repository that's cloned onto several computers. I can always revert
   to an earlier version of the site, and I won't lose any data even if half the
-  Internet goes up in flames.
-* It's easier to write new content. Writing a post in most web-based tools
-  requires logging in and composing in a half-baked, online version of
+  Internet goes up in flames. In contrast, most <abbr
+  class="initialism">CMS</abbr>s are difficult to version and backup because
+  all the data lives in a database.
+* It's easy to write new content. Writing a post in most web-based tools
+  requires logging in and struggling with a half-baked, online version of
   Microsoft Word.  With a static site, I can work offline &mdash; in whichever
   editor I choose &mdash; and publish my work later with a few quick commands.
 
 That said, there's no practical way for me to run my own comment system on a
-static site. [Disqus][] and [IntenseDebate][] offer easy workarounds, but I'll
-need to do a little more research before I'm ready to trust them with much
-data.
+static site. [Disqus][] and [IntenseDebate][] offer easy JavaScript-based
+workarounds, but I'll need to do a little more research before I'm ready to
+trust them with much data.
 
 I'm certainly not the only one to have realized that static sites solve a lot
 of problems &mdash; they're all the rage among geeks these days, and it seems
