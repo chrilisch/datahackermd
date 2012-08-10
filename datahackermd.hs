@@ -44,7 +44,6 @@ main = hakyll $ do
 
     -- Render posts
     match (allPosts `mappend` inGroup Nothing) $ do
-        -- Don't include the full date in post URLS
         route   $ setExtension ".html"
         compile $ pageCompiler
             >>> arr (renderDateField "date" "%e %B %Y" "Unknown Date")
@@ -81,7 +80,7 @@ main = hakyll $ do
             -- No route
             compile $ pageCompiler
                 >>> arr (renderDateField "date" "%e %B %Y" "Unknown Date")
-                >>> applyTemplateCompilers ["feed"]
+                >>> applyTemplateCompilers ["feeditem"]
                 >>> relativizeUrlsCompiler
 
     match "atom.xml" $ route idRoute

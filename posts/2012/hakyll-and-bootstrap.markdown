@@ -96,6 +96,6 @@ looks very similar to thousands of others.
 [Haskell]: http://www.haskell.org/haskellwiki/Haskell "HaskellWiki"
 [hakyll-docs]: http://jaspervdj.be/hakyll/tutorials.html "Hakyll Tutorials"
 [jasper]: http://jaspervdj.be "Jasper Van der Jeugt"
-[hakyll-list]: https://groups.google.com/forum/?fromgroups#!forum/hakyll "Hakyll Google Group"
+[hakyll-list]: http://groups.google.com/group/hakyll "Hakyll Google Group"
 [less]: http://lesscss.org "{less}"
 [Fabric]: http://docs.fabfile.org/en/1.4.3/tutorial.html "Fabric"
