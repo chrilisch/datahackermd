@@ -43,6 +43,14 @@ main = hakyll $ do
         compile $ copyFileCompiler
 
     -- Render posts
+    group "feed" $ do
+        match allPosts $ do
+            route   $ setExtension ".html"
+            compile $ pageCompiler
+                >>> arr (renderDateField "date" "%e %B %Y" "Unknown Date")
+                >>> applyTemplateCompilers ["feeditem"]
+                >>> relativizeUrlsCompiler
+
     match (allPosts `mappend` inGroup Nothing) $ do
         route   $ setExtension ".html"
         compile $ pageCompiler
@@ -75,17 +83,9 @@ main = hakyll $ do
     match "static/footer.html" $ compile readPageCompiler
 
     -- Compile RSS feed
-    group "rss" $ do
-        match allPosts $ do
-            -- No route
-            compile $ pageCompiler
-                >>> arr (renderDateField "date" "%e %B %Y" "Unknown Date")
-                >>> applyTemplateCompilers ["feeditem"]
-                >>> relativizeUrlsCompiler
-
     match "atom.xml" $ route idRoute
     create "atom.xml" $
-        requireAll_ (allPosts `mappend` inGroup (Just "rss"))
+        requireAll_ (allPosts `mappend` inGroup (Just "feed"))
         >>> mapCompiler (arr $ copyBodyToField "description")
         >>> renderAtom feedConfiguration
 
