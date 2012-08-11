@@ -10,7 +10,7 @@ import qualified Data.Map as M
 import Hakyll
 
 main :: IO ()
-main = hakyll $ do
+main = hakyllWith config $ do
     -- Copy Google Webmaster tools site verification file
     match "static/google3074ca16b9074992.html" $ do
         route   $ constRoute "google3074ca16b9074992.html"
@@ -140,3 +140,7 @@ feedConfiguration = FeedConfiguration
     , feedAuthorEmail = "akshay@datahackermd.com"
     , feedRoot        = "http://datahackermd.com"
     }
+
+config :: HakyllConfiguration
+config = defaultHakyllConfiguration
+    { deployCommand = "rsync --checksum --delete -ave 'ssh -p 21098' _site/* roliri@datahackermd.com:public_html" }
