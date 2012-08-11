@@ -1,0 +1,19 @@
+<div class="hero-unit pagination-centered">
+  <div class="row">
+
+      <img class="visible-desktop well pull-right" style="margin: 0 0 0 2em;" height="300" width="300" alt="" src="/img/oh-no-300x300.png">
+
+      <h1 class="entry-title">Oh Noes!</h1>
+      <div class="entry-content">
+        <p style="padding-top: 1em;">I'm sorry - datahackermd.com<!--#echo var="request_uri" --> doesn't seem to exist!</p>
+
+        <p>(Don't worry, it's probably my fault.)</p>
+
+        <p style="padding-top: 1em;">
+          <a class="btn btn-large btn-inverse" href="http://twitter.com/akshayshah"><i class="icon-twitter"></i> Send Angry Tweet</a>
+          <a class="btn btn-large btn-primary" href="/" style="margin-left: 0.5em;"><i class="icon-home"></i> To the Homepage!</a>
+        </p>
+      </div><!-- .entry-content -->
+
+  </div><!-- .row -->
+</div><!-- .hero-unit -->

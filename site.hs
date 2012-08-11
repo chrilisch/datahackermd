@@ -46,49 +46,52 @@ main = hakyllWith config $ do
     group "feed" $ do
         match allPosts $ do
             route   $ setExtension ".html"
-            compile $ pageCompiler
-                >>> arr (renderDateField "date" "%e %B %Y" "Unknown Date")
+            compile $ myPageCompiler
                 >>> applyTemplateCompilers ["feeditem"]
                 >>> relativizeUrlsCompiler
 
     match (allPosts `mappend` inGroup Nothing) $ do
         route   $ setExtension ".html"
-        compile $ pageCompiler
-            >>> arr (renderDateField "date" "%e %B %Y" "Unknown Date")
-            >>> addFooter
+        compile $ myPageCompiler
             >>> applyTemplateCompilers ["post", "default"]
             >>> relativizeUrlsCompiler
 
     -- Index
-    match "index.html" $ route idRoute
-    create "index.html" $ constA mempty
-        >>> arr (setField "title" "Posts")
-        >>> requireAllA (allPosts  `mappend` inGroup Nothing) addPostList
-        >>> addFooter
-        >>> applyTemplateCompilers ["index", "default"]
-        >>> relativizeUrlsCompiler
-
-    -- 404
-    match "404.shtml" $ route idRoute
-    create "404.shtml" $ constA mempty
-        >>> arr (setField "title" "404")
-        >>> addFooter
-        >>> applyTemplateCompilers ["404"]
-        >>> relativizeUrlsCompiler
+    match "index.html" $ do
+        route   $ idRoute
+        compile $ readPageCompiler
+            >>> myMetaA
+            >>> arr (setField "homeclass" "active")
+            >>> arr (setField "homehref" nullLink)
+            >>> arr (setField "title" "Posts")
+            >>> requireAllA (allPosts  `mappend` inGroup Nothing) addPostList
+            >>> arr applySelf
+            >>> applyTemplateCompilers ["default"]
+            >>> relativizeUrlsCompiler
 
     -- Colophon
-    match "colophon.html" $ route idRoute
-    create "colophon.html" $ constA mempty
-        >>> arr (setField "title" "Colophon")
-        >>> addFooter
-        >>> applyTemplateCompilers ["colophon", "default"]
-        >>> relativizeUrlsCompiler
+    match "colophon.html" $ do
+        route   $ idRoute
+        compile $ readPageCompiler
+            >>> myMetaA
+            >>> arr (setField "colophonclass" "active")
+            >>> arr (setField "colophonhref" nullLink)
+            >>> arr (setField "title" "Colophon")
+            >>> applyTemplateCompilers ["default"]
+            >>> relativizeUrlsCompiler
+
+    -- 404
+    match "404.shtml" $ do
+        route   $ idRoute
+        compile $ readPageCompiler
+            >>> myMetaA
+            >>> arr (setField "robots" "noindex, nofollow, noarchive, nocache")
+            >>> arr (setField "title" "404")
+            >>> applyTemplateCompilers ["default"]
+            >>> relativizeUrlsCompiler
 
     -- Compile templates
     match "templates/*.html" $ compile templateCompiler
-
-    -- Compile footer
-    match "static/footer.html" $ compile readPageCompiler
 
     -- Compile RSS feed
     match "atom.xml" $ route idRoute
@@ -100,8 +103,26 @@ main = hakyllWith config $ do
 -- | Helper functions
 --
 
-addFooter :: Compiler (Page String) (Page String)
-addFooter = requireA "static/footer.html" (setFieldA "footer" $ arr pageBody)
+-- Consistent convention for links that don't go anywhere
+-- FIXME: find a way to do this with <button> tags
+nullLink :: String
+nullLink = "javascript:void(0)"
+
+-- Default setup is for individual post pages
+myMetaA = arr (trySetField "robots" "index, follow")
+    >>> arr (trySetField "homeclass" "")
+    >>> arr (trySetField "colophonclass" "")
+    >>> arr (trySetField "homehref" "/index.html")
+    >>> arr (trySetField "colophonhref" "/colophon.html")
+    >>> arr (trySetField "author" "Akshay Shah")
+    >>> arr (renderDateField "date" "%e %B %Y" "Unknown Date")
+
+myPageCompiler :: Compiler Resource (Page String)
+myPageCompiler = readPageCompiler
+    >>> addDefaultFields
+    >>> myMetaA
+    >>> arr applySelf
+    >>> pageRenderPandoc
 
 allPosts :: Pattern (Page String)
 allPosts = parseGlob "posts/*/*.markdown"
