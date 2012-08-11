@@ -68,6 +68,14 @@ main = hakyllWith config $ do
         >>> applyTemplateCompilers ["index", "default"]
         >>> relativizeUrlsCompiler
 
+    -- 404
+    match "404.shtml" $ route idRoute
+    create "404.shtml" $ constA mempty
+        >>> arr (setField "title" "404")
+        >>> addFooter
+        >>> applyTemplateCompilers ["404"]
+        >>> relativizeUrlsCompiler
+
     -- Colophon
     match "colophon.html" $ route idRoute
     create "colophon.html" $ constA mempty
