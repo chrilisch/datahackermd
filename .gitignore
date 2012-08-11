@@ -7,7 +7,7 @@ cabal-dev
 .virtualenv
 
 # Hakyll binary
-datahackermd
+site
 
 # Hakyll cache and deploy folders
 _site
