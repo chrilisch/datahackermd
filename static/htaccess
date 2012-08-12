@@ -31,6 +31,6 @@ ErrorDocument 500 /errors/500.html
 </ifModule>
 
 # Cache for one week
-<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+<FilesMatch "\.(ico|jpg|jpeg|png|gif)$">
     Header set Cache-Control "max-age=604800, public"
 </FilesMatch>

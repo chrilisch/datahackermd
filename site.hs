@@ -216,4 +216,4 @@ addSitemapItems = setFieldA "sitemapitems" $
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration
-    { deployCommand = "rsync --checksum --delete -ave 'ssh -p 21098' _site/* roliri@datahackermd.com:public_html" }
+    { deployCommand = "rsync --checksum --delete -ave 'ssh -p 21098' _site/ roliri@datahackermd.com:public_html" }
