@@ -93,15 +93,30 @@ main = hakyllWith config $ do
             >>> relativizeUrlsCompiler
 
     -- 404
-    match "404.shtml" $ do
-        route   $ idRoute
+    -- Don't relativize URLs
+    match "static/404.shtml" $ do
+        route   $ constRoute "errors/404.shtml"
         compile $ readPageCompiler
             >>> myMetaA
             >>> arr (setField "postsclass" "")
             >>> arr (setField "title" "404")
             >>> arr (setField "robots" "noindex, nofollow, noarchive, nocache")
             >>> applyTemplateCompilers ["default", "scaffold"]
-            >>> relativizeUrlsCompiler
+ 
+     -- 403
+    match "static/403.shtml" $ do
+        route   $ constRoute "errors/403.shtml"
+        compile $ readPageCompiler
+            >>> myMetaA
+            >>> arr (setField "postsclass" "")
+            >>> arr (setField "title" "403")
+            >>> arr (setField "robots" "noindex, nofollow, noarchive, nocache")
+            >>> applyTemplateCompilers ["default", "scaffold"]
+
+    -- 500
+    match "static/500.html" $ do
+        route   $ constRoute "errors/500.html"
+        compile $ copyFileCompiler
 
     -- Compile templates
     match "templates/*" $ compile templateCompiler

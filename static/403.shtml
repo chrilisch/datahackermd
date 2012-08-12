@@ -1,0 +1,15 @@
+<div class="hero-unit 403 pagination-centered">
+  <div class="alert alert-error">
+    <i class="icon-warning-sign"></i> Error 403: datahackermd.com<!--#echo var="request_uri" -->
+  </div><!-- .alert .alert-error -->
+
+  <img class="visible-desktop well pull-right" style="margin: 0 0 0 2em;" height="300" width="300" alt="" src="/img/oh-no-300x300.png">
+
+  <h1>Verboten!</h1>
+  <p>Can't a fella have any privacy at all? Seriously, though, nobody's allowed to see that page.</p>
+
+  <p style="padding-top: 1em;">
+    <a class="btn btn-large btn-inverse" href="http://twitter.com/akshayshah"><i class="icon-twitter"></i> Send Angry Tweet</a>
+    <a class="btn btn-large btn-primary" href="/" style="margin-left: 0.5em;"><i class="icon-home"></i> To the Homepage!</a>
+  </p>
+</div><!-- .hero-unit -->
