@@ -37,9 +37,14 @@ main = hakyllWith config $ do
         route   $ setExtension ".min.js"
         compile $ getResourceString >>> unixFilter "jsmin" []
 
-    -- Copy images
-    match "img/*" $ do
+    -- Copy PNGs
+    match "img/*.png" $ do
         route   $ idRoute
+        compile $ copyFileCompiler
+
+    -- Copy favicon
+    match "img/favicon.ico" $ do
+        route   $ constRoute "favicon.ico"
         compile $ copyFileCompiler
 
     -- Render posts
