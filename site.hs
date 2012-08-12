@@ -104,7 +104,7 @@ main = hakyllWith config $ do
             >>> relativizeUrlsCompiler
 
     -- Compile templates
-    match "templates/*.html" $ compile templateCompiler
+    match "templates/*" $ compile templateCompiler
 
     -- Compile RSS feed
     match "atom.xml" $ route idRoute
@@ -112,6 +112,13 @@ main = hakyllWith config $ do
         requireAll_ (allPosts `mappend` inGroup (Just "feed"))
         >>> mapCompiler (arr $ copyBodyToField "description")
         >>> renderAtom feedConfiguration
+
+    -- Compile sitemap
+    match "sitemap.xml" $ route idRoute
+    create "sitemap.xml" $ constA mempty
+        >>> requireAllA (allPosts `mappend` inGroup (Just "feed")) addSitemapItems
+        >>> applyTemplateCompiler "templates/sitemap.xml"
+        >>> relativizeUrlsCompiler
 
 -- | Helper functions
 --
@@ -184,6 +191,13 @@ feedConfiguration = FeedConfiguration
     , feedAuthorEmail = "akshay@datahackermd.com"
     , feedRoot        = "http://datahackermd.com"
     }
+
+addSitemapItems :: Compiler (Page String, [Page String]) (Page String)
+addSitemapItems = setFieldA "sitemapitems" $
+    arr chronological
+        >>> require "templates/sitemapitem.xml" (\p t -> map (applyTemplate t) p)
+        >>> arr mconcat
+        >>> arr pageBody
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration

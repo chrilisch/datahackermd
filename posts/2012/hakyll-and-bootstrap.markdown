@@ -1,7 +1,7 @@
 ---
 title: Hakyll and Bootstrap
-author: Akshay Shah
 published: 2012-08-04T19:00:00Z
+updated: 2012-08-04T19:00:00Z
 preview: Monadic <abbr class="initialism">I/O</abbr> hurts so good
 ---
 
