@@ -1,12 +1,67 @@
 @import "less/bootstrap.less";
 @import "less/responsive.less";
 
+@sansFontFamily: "Rosario", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@baseFontSize: 16px;
+@baseLineHeight: 24px;
+
+@navbarHeight: 60px;
+@heroUnitBackground: @white;
+
+//
+// OVERRIDES
+//
+
+// Style the brand nav like the nav links
+.navbar {
+  .brand.active,
+  .brand.active:hover {
+    color: @navbarLinkColorActive;
+    background: @navbarLinkBackgroundActive;
+  }
+  .brand:hover {
+    color: @navbarLinkColorHover;
+    background: @navbarLinkBackgroundHover;
+  }
+}
+
 // Keep the navbar from overlapping the content on wide displays, but
 // don't leave a white stripe above the navbar on tables or phones.
 #top-spacer.visible-desktop {
-  padding-top: 60px;
+  padding-top: 80px;
 }
 
 .page-header {
+  h2 {
+    line-height: 1.5;
+  }
   padding-bottom: 0.5em;
+}
+
+.hero-unit {
+  h1 {
+    font-size: @baseFontSize * 4;
+    margin-bottom: 0.75em;
+  }
+  p {
+    font-size: @baseFontSize * 1.25;
+    line-height: @baseLineHeight * 1.25;
+    padding-bottom: 0.5em;
+  }
+  .btn {
+    margin: 1em 0.5em 0 0;
+  }
+}
+
+.postitem {
+  padding-bottom: 2em;
+  h2 {
+    line-height: 1.5;
+  }
+}
+
+.footer {
+  color: @gray;
+  font-size: @baseFontSize * 0.8;
+  line-height: @baseLineHeight * 0.8;
 }

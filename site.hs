@@ -53,7 +53,7 @@ main = hakyllWith config $ do
     match (allPosts `mappend` inGroup Nothing) $ do
         route   $ setExtension ".html"
         compile $ myPageCompiler
-            >>> applyTemplateCompilers ["post", "default"]
+            >>> applyTemplateCompilers ["post", "default", "scaffold"]
             >>> relativizeUrlsCompiler
 
     -- Index
@@ -61,12 +61,23 @@ main = hakyllWith config $ do
         route   $ idRoute
         compile $ readPageCompiler
             >>> myMetaA
+            >>> arr (setField "title" "Home")
+            >>> arr (setField "postsclass" "")
+            >>> arr (setField "homeurl" nullLink)
             >>> arr (setField "homeclass" "active")
-            >>> arr (setField "homehref" nullLink)
+            >>> applyTemplateCompilers ["scaffold"]
+            >>> relativizeUrlsCompiler
+
+    -- Posts
+    match "posts.html" $ do
+        route   $ idRoute
+        compile $ readPageCompiler
+            >>> myMetaA
             >>> arr (setField "title" "Posts")
+            >>> arr (setField "postsurl" nullLink)
             >>> requireAllA (allPosts  `mappend` inGroup Nothing) addPostList
             >>> arr applySelf
-            >>> applyTemplateCompilers ["default"]
+            >>> applyTemplateCompilers ["default", "scaffold"]
             >>> relativizeUrlsCompiler
 
     -- Colophon
@@ -74,10 +85,11 @@ main = hakyllWith config $ do
         route   $ idRoute
         compile $ readPageCompiler
             >>> myMetaA
-            >>> arr (setField "colophonclass" "active")
-            >>> arr (setField "colophonhref" nullLink)
             >>> arr (setField "title" "Colophon")
-            >>> applyTemplateCompilers ["default"]
+            >>> arr (setField "postsclass" "")
+            >>> arr (setField "colophonclass" "active")
+            >>> arr (setField "colophonurl" nullLink)
+            >>> applyTemplateCompilers ["default", "scaffold"]
             >>> relativizeUrlsCompiler
 
     -- 404
@@ -85,9 +97,10 @@ main = hakyllWith config $ do
         route   $ idRoute
         compile $ readPageCompiler
             >>> myMetaA
-            >>> arr (setField "robots" "noindex, nofollow, noarchive, nocache")
+            >>> arr (setField "postsclass" "")
             >>> arr (setField "title" "404")
-            >>> applyTemplateCompilers ["default"]
+            >>> arr (setField "robots" "noindex, nofollow, noarchive, nocache")
+            >>> applyTemplateCompilers ["default", "scaffold"]
             >>> relativizeUrlsCompiler
 
     -- Compile templates
@@ -111,9 +124,11 @@ nullLink = "javascript:void(0)"
 -- Default setup is for individual post pages
 myMetaA = arr (trySetField "robots" "index, follow")
     >>> arr (trySetField "homeclass" "")
+    >>> arr (trySetField "postsclass" "active")
     >>> arr (trySetField "colophonclass" "")
-    >>> arr (trySetField "homehref" "/index.html")
-    >>> arr (trySetField "colophonhref" "/colophon.html")
+    >>> arr (trySetField "homeurl" "/")
+    >>> arr (trySetField "postsurl" "/posts.html")
+    >>> arr (trySetField "colophonurl" "/colophon.html")
     >>> arr (trySetField "author" "Akshay Shah")
     >>> arr (renderDateField "date" "%e %B %Y" "Unknown Date")
 
@@ -140,22 +155,22 @@ pair _ = []
 -- Auxiliary compiler: given a list of posts and a template, combine
 -- posts pairwise using the template and return another list of posts
 --
-applyPostRow :: [Page String] -> Template -> [Page String] 
-applyPostRow posts template = do 
-        -- Take a pair of two pages 
-        (p1, p2) <- pair posts 
-        -- Create a combined page 
-        let p = fromMap $ M.fromList 
-                    [("post1", pageBody p1), ("post2", pageBody p2)] 
-        -- Return the rendered, combined page 
-        return $ applyTemplate template p 
+applyPostRow :: [Page String] -> Template -> [Page String]
+applyPostRow posts template = do
+        -- Take a pair of two pages
+        (p1, p2) <- pair posts
+        -- Create a combined page
+        let p = fromMap $ M.fromList
+                    [("post1", pageBody p1), ("post2", pageBody p2)]
+        -- Return the rendered, combined page
+        return $ applyTemplate template p
 
 -- Auxiliary compiler: generate a post list from a list of given posts, and
 -- add it to the current page under @$posts@
 --
 addPostList :: Compiler (Page String, [Page String]) (Page String)
 addPostList = setFieldA "posts" $
-    arr recentFirst 
+    arr recentFirst
         >>> require "templates/postitem.html" (\p t -> map (applyTemplate t) p)
         >>> require "templates/postrow.html" applyPostRow
         >>> arr mconcat
