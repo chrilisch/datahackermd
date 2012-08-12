@@ -29,3 +29,8 @@ ErrorDocument 500 /errors/500.html
 <ifModule mod_headers.c>
     Header set Connection keep-alive
 </ifModule>
+
+# Cache for one week
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+    Header set Cache-Control "max-age=604800, public"
+</FilesMatch>

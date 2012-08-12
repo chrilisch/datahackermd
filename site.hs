@@ -25,7 +25,7 @@ main = hakyllWith config $ do
     match "style.less" $ do
         route   $ setExtension ".css"
         -- lessc can't read from stdin
-        compile $ getResourceString >>> unixFilter "lessc" ["style.less", "-x"]
+        compile $ getResourceString >>> unixFilter "lessc" ["style.less", "--yui-compress"]
 
     -- Copy fonts
     match "font/*" $ do
@@ -33,9 +33,9 @@ main = hakyllWith config $ do
         compile $ copyFileCompiler
 
     -- Copy Javascript
-    match "js/*" $ do
-        route   $ idRoute
-        compile $ copyFileCompiler
+    match "js/*.js" $ do
+        route   $ setExtension ".min.js"
+        compile $ getResourceString >>> unixFilter "jsmin" []
 
     -- Copy images
     match "img/*" $ do
