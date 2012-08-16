@@ -48,6 +48,9 @@ external search engine. Most importantly, it's impossible for me to store and
 manage reader comments. Services like [Disqus][] and [IntenseDebate][] offer
 easy Javascript-based workarounds, but I'll need to do a little more due
 diligence before I'm comfortable trusting them with critical data.
+(*Update*: I've added Disqus comments to all posts. However, the widget renders
+so poorly on small screens that I've hidden it on devices smartphone-sized and
+smaller.)
 
 Hakyll also has its own set of challenges, mostly because it's written and
 configured in [Haskell][]. To put it mildly, I'm a Haskell neophyte &mdash;
