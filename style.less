@@ -1,36 +1,21 @@
 @import "less/bootstrap.less";
+// Needs to be before responsive styles
+body {
+  padding-top: 72px; // @baseLineHeight * 3
+  padding-bottom: 48px; // @baseLineHeight * 2
+}
 @import "less/responsive.less";
 
 @sansFontFamily: "Rosario", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @baseFontSize: 16px;
 @baseLineHeight: 24px;
 
-@navbarHeight: 60px;
-@heroUnitBackground: @white;
-
-//
-// OVERRIDES
-//
-
-// Style the brand nav like the nav links
-
-// Keep the navbar from overlapping the content on wide displays, but
-// don't leave a white stripe above the navbar on tables or phones.
-#top-spacer.visible-desktop {
-  padding-top: 80px;
-}
-
-.page-header {
-  h2 {
-    line-height: 1.5;
-  }
-  padding-bottom: 0.5em;
-}
+@navbarHeight: @baseLineHeight * 2;
+@heroUnitBackground: @bodyBackground;
 
 .hero-unit {
   h1 {
-    font-size: @baseFontSize * 4;
-    margin-bottom: 0.75em;
+    margin-bottom: 1.25em;
   }
   p {
     font-size: @baseFontSize * 1.25;
@@ -42,10 +27,31 @@
   }
 }
 
+.page-header {
+  h1 {
+    margin-bottom: 0;
+  }
+  h2 {
+    margin: 0;
+    line-height: 1;
+  }
+  padding-bottom: 0.5em;
+}
+
 .postitem {
   padding-bottom: 2em;
   h2 {
-    line-height: 1.5;
+    margin-bottom: 0.25em;
+  }
+}
+
+div.entry-content {
+  // Let the text breathe a little
+  h2 {
+    margin: 1em 0 0.5em;
+  } 
+  p {
+    margin: 1em 0;
   }
 }
 

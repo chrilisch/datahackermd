@@ -48,14 +48,12 @@ external search engine. Most importantly, it's impossible for me to store and
 manage reader comments. Services like [Disqus][] and [IntenseDebate][] offer
 easy Javascript-based workarounds, but I'll need to do a little more due
 diligence before I'm comfortable trusting them with critical data.
-(*Update*: I've added Disqus comments to all posts. However, the widget renders
-so poorly on small screens that I've hidden it on devices smartphone-sized and
-smaller.)
+(*Update*: I've added Disqus comments to all posts.)
 
 Hakyll also has its own set of challenges, mostly because it's written and
 configured in [Haskell][]. To put it mildly, I'm a Haskell neophyte &mdash;
 I've been interested in the language for about a year, but haven't done
-anything more than a few [Project Euler][] questions. Since I also don't have a
+anything more than a few [Project Euler][] questions. Since I don't have a
 strong background in category theory, monads and arrows are *blowing my mind*.
 There's something really amazing and elegant going on, but I'm only catching
 glimpses of it between compiler errors. Nevertheless, the Hakyll
@@ -74,17 +72,18 @@ mobile-friendly, and it's teaching me some of <abbr
 class="initialism">HTML</abbr>5's new tricks. [{less}][less], the <abbr
 class="initialism">CSS</abbr> meta-language Boostrap uses, is also wonderful:
  it's close enough to vanilla <abbr class="initialism">CSS</abbr> that
-it's easy to learn, but it's made my stylesheets much more modular and
+it's easy to learn, but it makes my stylesheets much more modular and
 consistent.
 
 While I haven't tweaked Bootstrap's default styling much, I *had* to do
 something about the fonts. I like Helvetica, especially on visually intense
 marketing sites &mdash; but Bootstrap's tiny default font size combined with
-Helvetica's clinical modernism made blocks text downright hostile. After a few
+Helvetica's clinical modernism made blocks of text downright hostile. After a few
 hours poking through [Google Web Fonts][webfonts] and testing different styles,
 I settled on [Omnibus Type's][omnibus] [Rosario][rosario]. To my eye, it
 manages to be a little more playful and human than Helvetica without
-distracting from the words themselves.
+distracting from the words themselves. (*Update*: Bootstrap 2.1.0 increased the
+default font sizes, but they still look too small to me.)
 
 My efforts to choose a different color scheme, though, have been a complete
 failure. The defaults are nice enough, but they lack soul, and my efforts to
