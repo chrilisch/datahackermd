@@ -52,7 +52,7 @@ diligence before I'm comfortable trusting them with critical data.
 
 Hakyll also has its own set of challenges, mostly because it's written and
 configured in [Haskell][]. To put it mildly, I'm a Haskell neophyte &mdash;
-I've been interested in the language for about a year, but haven't done
+I've been interested in the language for months, but haven't done
 anything more than a few [Project Euler][] questions. Since I don't have a
 strong background in category theory, monads and arrows are *blowing my mind*.
 There's something really amazing and elegant going on, but I'm only catching
