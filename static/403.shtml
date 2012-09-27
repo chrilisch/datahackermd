@@ -9,7 +9,6 @@
   <p>Can't a fella have any privacy at all? Seriously, though, nobody's allowed to see that page.</p>
 
   <p style="padding-top: 1em;">
-    <a class="btn btn-large btn-inverse" href="http://twitter.com/akshayshah"><i class="icon-twitter"></i> Send Angry Tweet</a>
     <a class="btn btn-large btn-primary" href="/" style="margin-left: 0.5em;"><i class="icon-home"></i> To the Homepage!</a>
   </p>
 </div><!-- .hero-unit -->

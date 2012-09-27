@@ -7,10 +7,8 @@
 
   <h1>Oh Noes!</h1>
   <p>The page you're looking for is just&hellip;<em>gone</em>. How odd.</p>
-  <p>(Sorry, it's probably my fault.)</p>
 
   <p style="padding-top: 1em;">
-    <a class="btn btn-large btn-inverse" href="http://twitter.com/akshayshah"><i class="icon-twitter"></i> Send Angry Tweet</a>
     <a class="btn btn-large btn-primary" href="/" style="margin-left: 0.5em;"><i class="icon-home"></i> To the Homepage!</a>
   </p>
 </div><!-- .hero-unit -->
