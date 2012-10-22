@@ -4,6 +4,8 @@ module Main where
 import Prelude hiding (id)
 import Control.Category (id)
 import Control.Arrow ((>>>), (***), arr)
+import Data.List (sortBy)
+import Data.Ord (comparing)
 import Data.Monoid (mappend, mempty, mconcat)
 import qualified Data.Map as M
 
@@ -192,12 +194,16 @@ applyPostRow posts template = do
         -- Return the rendered, combined page
         return $ applyTemplate template p
 
+-- Sort reverse-chronologically
+reverseChronological :: [Page a] -> [Page a]
+reverseChronological = reverse . (sortBy $ comparing $ getField "published")
+
 -- Auxiliary compiler: generate a post list from a list of given posts, and
 -- add it to the current page under @$posts@
 --
 addPostList :: Compiler (Page String, [Page String]) (Page String)
 addPostList = setFieldA "posts" $
-    arr recentFirst
+    arr reverseChronological
         >>> require "templates/postitem.html" (\p t -> map (applyTemplate t) p)
         >>> require "templates/postrow.html" applyPostRow
         >>> arr mconcat
