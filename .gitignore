@@ -1,0 +1,5 @@
+*.py[cod]
+.env
+
+# OS X cruft
+.DS_Store

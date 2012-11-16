@@ -1,0 +1,14 @@
+{%- extends 'base.html' %}
+{%- from 'macros.html' import post_date, comments %}
+
+{% block titletag %}{{ post.title }}{% endblock titletag %}
+
+{%- block content %}
+<header>
+  <h1>{{ post.title }}</h1>
+  {{ post_date(post) }}
+</header>
+
+{{ post }}
+{{ comments(post) }}
+{%- endblock content %}

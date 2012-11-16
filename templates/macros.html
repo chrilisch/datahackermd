@@ -1,0 +1,27 @@
+{%- macro comments(p) %}
+{%- set slug = p.path.split('/')[-1] %}
+{# When there's more than one page without comments, break them out into a separate template #}
+{%- if slug != 'colophon' %}
+<article id="disqus_thread" class="comments"></article>
+<script type="text/javascript">
+  if (document.getElementById('disqus_thread')) {
+    var disqus_shortname = 'datahackermd';
+    var disqus_identifier = "{{ slug }}";
+    var disqus_url = "{{ 'http://datahackermd.com/%s/' % slug }}";
+    var disqus_title = "p.title";
+
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  }
+</script>
+{%- endif %}
+{%- endmacro %}
+
+{%- macro post_date(p) %}
+  {%- with d = p.updated if p.updated else p.published %}
+  <time class="post-date" datetime="{{ d }}">{{ d.strftime('%B %d, %Y') }}</time><br>
+  {%- endwith %}
+{%- endmacro %}

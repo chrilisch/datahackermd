@@ -1,0 +1,25 @@
+{%- extends 'base.html' %}
+{%- from 'macros.html' import post_date %}
+
+{% block titletag %}Home{% endblock %}
+
+{% block postheader %}
+
+<p class="lead">Hi, I&rsquo;m Akshay.  I&rsquo;ve been a medical student, a public
+school teacher, an <abbr>EMT</abbr>, and (briefly) a spammer; these days, I&rsquo;m loving life
+as a data scientist in foggy San Francisco. Shoot me an
+<a href="mailto:akshay@datahackermd.com">email</a> and say hello,
+or <a href="/colophon/">read a bit more about me</a>.</p>
+
+{% endblock postheader %}
+
+{%- block content %}
+<ol class="post-list">
+{%- for post in posts | sort(reverse=True, attribute='published') %}
+  <li>
+    <h2><a href="{{'/%s/' % post.path }}">{{ post.title }}</a></h2>
+    {{ post_date(post) }}
+  </li>
+{%- endfor %}
+</ol><!-- .post-list -->
+{%- endblock content %}

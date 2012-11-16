@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block titletag %}{% endblock titletag %} :: Data Hacker, MD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thoughts from a physician-turned-data scientist.">
+    <meta name="author" content="Akshay Shah">
+
+    <!-- Fonts -->
+    <script type="text/javascript" src="http://use.typekit.net/xsy8lin.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="/static/style.min.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <nav class="branding">By day, just <a href="/colophon/">Akshay Shah</a>. By night,<br>
+      <a class="site-name" href="/">Data Hacker, MD</a><br>
+      <img class="flourish" src="/static/flourish.svg" height="72px">
+    </nav><!-- .branding -->
+
+    <article>
+      {%- block postheader %}{%- endblock postheader %}
+      {%- block content %}{%- endblock content %}
+    </article><! -- .container .hentry -->
+
+    <footer>
+    <img class="flourish" src="/static/flourish.svg" height="72px"><br>
+      I'm also on <a href="http://twitter.com/akshayshah">Twitter</a>, <a href="http://github.com/akshayjshah">GitHub</a>, and <a href="http://linkedin.com/in/akshayjshah">LinkedIn</a>.<br>
+    </footer>
+
+    {%- include "analytics.html" %}
+  </body>
+</html>
