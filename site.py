@@ -1,4 +1,5 @@
 import logging
+import subprocess
 
 from flask import Flask, Response, render_template
 from flask_flatpages import FlatPages
@@ -51,9 +52,13 @@ def post(path):
     return render_template('post.html', post=post)
 
 
+@app.route('/404.html')
+def error404():
+    return render_template('404.html')
+
+
 @app.route('/static/style.min.css')
 def style():
-    import subprocess
     less = subprocess.check_output([
         'lessc',
         '--yui-compress',
@@ -65,6 +70,7 @@ def style():
 def sitemap():
     sitemap = render_template('sitemap.xml', posts=posts)
     return Response(sitemap, mimetype='application/xml')
+
 
 @app.route('/CNAME')
 def cname():
