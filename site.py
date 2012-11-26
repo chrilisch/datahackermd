@@ -42,8 +42,8 @@ posts = FlatPages(app)
 
 
 @app.route('/')
-def post_list():
-    return render_template('posts.html', posts=posts)
+def index():
+    return render_template('index.html', posts=posts)
 
 
 @app.route('/<path:path>/')
